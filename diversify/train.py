@@ -93,6 +93,7 @@ def main(args):
 
     print(f'Target acc: {target_acc:.4f}')
 
+    torch.save(alg.state_dict(), "./data/ckpt")
 
 if __name__ == '__main__':
     args = get_args()
