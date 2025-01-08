@@ -94,7 +94,7 @@ def main(args):
     print(f'Target acc: {target_acc:.4f}')
 
     save_dir = os.path.join(args.output, "ckpt.pth.rar")
-    torch.save(algorithm.state_dict(), save_dir)
+    torch.save({'state_dict': algorithm.state_dict()}, save_dir)
 
 if __name__ == '__main__':
     args = get_args()
