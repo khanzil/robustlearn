@@ -1,6 +1,6 @@
 # Copyright (c) Microsoft Corporation.
 # Licensed under the MIT License.
-
+import os
 import time
 from alg.opt import *
 from alg import alg, modelopera
@@ -93,6 +93,8 @@ def main(args):
 
     print(f'Target acc: {target_acc:.4f}')
 
+    save_dir = os.path.join(args.output, "ckpt.pth.rar")
+    torch.save(algorithm.state_dict(), save_dir)
 
 if __name__ == '__main__':
     args = get_args()
