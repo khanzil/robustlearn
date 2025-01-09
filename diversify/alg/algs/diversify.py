@@ -76,12 +76,15 @@ class Diversify(Algorithm):
                 if start_test:
                     all_fea = feas.float().cpu()
                     all_output = outputs.float().cpu()
+                    all_inputs = inputs.float().cpu()
                     all_index = index
                     start_test = False
                 else:
                     all_fea = torch.cat((all_fea, feas.float().cpu()), 0)
                     all_output = torch.cat(
                         (all_output, outputs.float().cpu()), 0)
+                    all_inputs = torch.cat(
+                        (all_inputs, outputs.float().cpu()), 0)
                     all_index = np.hstack((all_index, index))
         all_output = nn.Softmax(dim=1)(all_output)
 
@@ -109,7 +112,7 @@ class Diversify(Algorithm):
         self.dclassifier.train()
         self.featurizer.train()
 
-        return all_index, all_fea, pred_label, inputs.cpu().numpy()
+        return all_index, all_fea, pred_label, all_inputs
 
     def update(self, data, opt):
         all_x = data[0].cuda().float()
