@@ -6,7 +6,7 @@ from alg.opt import *
 from alg import alg, modelopera
 from utils.util import set_random_seed, get_args, print_row, print_args, train_valid_target_eval_names, alg_loss_dict, print_environ
 from datautil.getdataloader_single import get_act_dataloader
-
+import pandas as pd
 
 def main(args):
     s = print_args(args, [])
@@ -53,7 +53,10 @@ def main(args):
             print_row([step]+[loss_result_dict[item]
                               for item in loss_list], colwidth=15)
 
-        algorithm.set_dlabel(train_loader)
+        if round == args.max_epoch-1:
+            dindex, dfea, dpred = algorithm.set_dlabel(train_loader)
+        else:
+            algorithm.set_dlabel(train_loader)
 
         print('====Domain-invariant feature learning====')
 
@@ -92,6 +95,9 @@ def main(args):
             print_row([results[key] for key in print_key], colwidth=15)
 
     print(f'Target acc: {target_acc:.4f}')
+
+    df = pd.DataFrame([dindex, dfea, dpred ], header = ["dindex", "dfea", "dpred"])
+    df.to_csv(args.output+"domain_data.csv")
 
     save_dir = os.path.join(args.output, "ckpt.pth.rar")
     torch.save({'state_dict': algorithm.state_dict()}, save_dir)

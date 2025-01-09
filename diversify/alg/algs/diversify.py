@@ -109,6 +109,8 @@ class Diversify(Algorithm):
         self.dclassifier.train()
         self.featurizer.train()
 
+        return all_index, all_fea, pred_label
+
     def update(self, data, opt):
         all_x = data[0].cuda().float()
         all_y = data[1].cuda().long()
@@ -148,3 +150,6 @@ class Diversify(Algorithm):
 
     def predict1(self, x):
         return self.ddiscriminator(self.dbottleneck(self.featurizer(x)))
+
+
+

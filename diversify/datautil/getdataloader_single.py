@@ -26,13 +26,13 @@ def get_dataloader(args, tr, val, tar):
 
 
 def get_act_dataloader(args):
-    source_datasetlist = []
-    target_datalist = []
+    source_datasetlist = [] # contain train folds
+    target_datalist = [] # contain test folds
     pcross_act = task_act[args.task]
 
-    tmpp = args.act_people[args.dataset]
+    tmpp = args.act_people[args.dataset] # args.act_people = {'emg': [[i*9+j for j in range(9)]for i in range(4)]}
     args.domain_num = len(tmpp)
-    for i, item in enumerate(tmpp):
+    for i, item in enumerate(tmpp): # i = domain num, item = group of pp
         tdata = pcross_act.ActList(
             args, args.dataset, args.data_dir, item, i, transform=actutil.act_train())
         if i in args.test_envs:
