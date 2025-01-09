@@ -96,8 +96,8 @@ def main(args):
             print_row([results[key] for key in print_key], colwidth=15)
 
     print(f'Target acc: {target_acc:.4f}')
-
-    df = pd.DataFrame(np.hstack((dindex, dpred)))
+    
+    df = pd.DataFrame(np.hstack((dindex, dpred)).T)
     df.to_csv(args.output+"domain_pead.csv", header = ["dindex", "dpred"])
 
     dffea = pd.DataFrame(dfea)
