@@ -103,8 +103,7 @@ def main(args):
     dffea = pd.DataFrame(dfea)
     dffea.to_csv(args.output+"domain_fea.csv")
 
-    dfinput = pd.DataFrame(dinput)
-    dfinput.to_csv(args.output+"domain_input.csv")
+    np.save(args.output+"domain_input.npy", dinput) 
 
     save_dir = os.path.join(args.output, "ckpt.pth.rar")
     torch.save({'state_dict': algorithm.state_dict()}, save_dir)

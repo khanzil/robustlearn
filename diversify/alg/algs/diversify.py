@@ -109,7 +109,7 @@ class Diversify(Algorithm):
         self.dclassifier.train()
         self.featurizer.train()
 
-        return all_index, all_fea, pred_label, inputs.cpu().numpy()
+        return all_index, all_fea, pred_label
 
     def update(self, data, opt):
         all_x = data[0].cuda().float()
