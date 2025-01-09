@@ -7,6 +7,7 @@ from alg import alg, modelopera
 from utils.util import set_random_seed, get_args, print_row, print_args, train_valid_target_eval_names, alg_loss_dict, print_environ
 from datautil.getdataloader_single import get_act_dataloader
 import pandas as pd
+import numpy as np
 
 def main(args):
     s = print_args(args, [])
@@ -96,9 +97,7 @@ def main(args):
 
     print(f'Target acc: {target_acc:.4f}')
 
-    print(dindex.shape)
-    print(dpred.shape)
-    df = pd.DataFrame([dindex, dpred])
+    df = pd.DataFrame(np.hstack(dindex, dpred))
     df.to_csv(args.output+"domain_pead.csv", header = ["dindex", "dpred"])
 
     dffea = pd.DataFrame(dfea)
