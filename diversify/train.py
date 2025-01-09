@@ -96,6 +96,8 @@ def main(args):
 
     print(f'Target acc: {target_acc:.4f}')
 
+    print(dindex.shape)
+    print(dpred.shape)
     df = pd.DataFrame([dindex, dpred])
     df.to_csv(args.output+"domain_pead.csv", header = ["dindex", "dpred"])
 
