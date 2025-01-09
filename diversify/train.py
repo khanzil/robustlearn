@@ -55,7 +55,7 @@ def main(args):
                               for item in loss_list], colwidth=15)
 
         if round == args.max_epoch-1:
-            dindex, dfea, dpred = algorithm.set_dlabel(train_loader)
+            dindex, dfea, dpred, dinput = algorithm.set_dlabel(train_loader)
         else:
             algorithm.set_dlabel(train_loader)
 
@@ -98,10 +98,13 @@ def main(args):
     print(f'Target acc: {target_acc:.4f}')
     
     df = pd.DataFrame(np.vstack((dindex, dpred)).T)
-    df.to_csv(args.output+"domain_pead.csv", header = ["dindex", "dpred"])
+    df.to_csv(args.output+"domain_pred.csv", header = ["dindex", "dpred"])
 
     dffea = pd.DataFrame(dfea)
     dffea.to_csv(args.output+"domain_fea.csv")
+
+    dfinput = pd.DataFrame(dinput)
+    dfinput.to_csv(args.output+"domain_input.csv")
 
     save_dir = os.path.join(args.output, "ckpt.pth.rar")
     torch.save({'state_dict': algorithm.state_dict()}, save_dir)
