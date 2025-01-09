@@ -84,7 +84,7 @@ class Diversify(Algorithm):
                     all_output = torch.cat(
                         (all_output, outputs.float().cpu()), 0)
                     all_inputs = torch.cat(
-                        (all_inputs, outputs.float().cpu()), 0)
+                        (all_inputs, inputs.float().cpu()), 0)
                     all_index = np.hstack((all_index, index))
         all_output = nn.Softmax(dim=1)(all_output)
 
