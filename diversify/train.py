@@ -97,7 +97,10 @@ def main(args):
     print(f'Target acc: {target_acc:.4f}')
 
     df = pd.DataFrame([dindex, dpred])
-    df.to_csv(args.output+"domain_data.csv", header = ["dindex", "dpred"])
+    df.to_csv(args.output+"domain_pead.csv", header = ["dindex", "dpred"])
+
+    dffea = pd.DataFrame(dfea)
+    dffea.to_csv(args.output+"domain_fea.csv")
 
     save_dir = os.path.join(args.output, "ckpt.pth.rar")
     torch.save({'state_dict': algorithm.state_dict()}, save_dir)
