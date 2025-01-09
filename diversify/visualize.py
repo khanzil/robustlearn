@@ -23,14 +23,16 @@ import pandas as pd
 # plt.plot(fea_map)
 # plt.show()
 
-data = np.float32(np.loadtxt("./data/emg/01/1_raw_data_13-12_22.03.16.txt", dtype=str)[1:,:]) # data size (smt, 10)
+data = np.float32(np.loadtxt("./data/emg/01/1_raw_data_13-13_22.03.16.txt", dtype=str)[1:,:]) # data size (smt, 10)
 idx = np.argwhere(data[:,9] == 3)
 x = data[idx,:9]
 print(x.shape)
 # plt.plot(data[:,1])
 # plt.show()
 
-# y = np.load("./data/emg/emg_y.npy", ) # data size (smt, 3), 3 is (class, people, 0)
+y = np.load("./data/emg/emg_y.npy", ) # data size (smt, 3), 3 is (class, people, 0)
+idx = np.argwhere(y[:,0] == 3)
+
 # df = pd.DataFrame(y)
 # df.to_csv("test.csv", header=['one', 'two', 'three'])
 
