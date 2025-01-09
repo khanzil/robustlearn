@@ -98,12 +98,12 @@ def main(args):
     print(f'Target acc: {target_acc:.4f}')
     
     df = pd.DataFrame(np.vstack((dindex, dpred)).T)
-    df.to_csv(args.output+"domain_pred.csv", header = ["dindex", "dpred"])
+    df.to_csv(args.output+"/"+"domain_pred.csv", header = ["dindex", "dpred"])
 
     dffea = pd.DataFrame(dfea)
-    dffea.to_csv(args.output+"domain_fea.csv")
+    dffea.to_csv(args.output+"/"+"domain_fea.csv")
 
-    np.save(args.output+"domain_input.npy", dinput) 
+    np.save(args.output+"/"+"domain_input.npy", dinput) 
 
     save_dir = os.path.join(args.output, "ckpt.pth.rar")
     torch.save({'state_dict': algorithm.state_dict()}, save_dir)
